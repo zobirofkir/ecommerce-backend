@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AuthResource extends JsonResource
+class LoginResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,7 @@ class AuthResource extends JsonResource
         return [
             "name" => $this->name,
             "email" => $this->email,
-            "image"=> asset("storage/" . $this->image)
+            "accessToken" => $this->generateToken()
         ];
     }
 }
