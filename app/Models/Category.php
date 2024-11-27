@@ -18,6 +18,10 @@ class Category extends Model
         "slug"
     ];
 
+    protected $casts = [
+        "image" => "array"
+    ];
+
     protected static function boot()
     {
         parent::boot();
