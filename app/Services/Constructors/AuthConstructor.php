@@ -24,6 +24,6 @@ interface AuthConstructor
 
     public function forgotPassword(ResetPasswordRequest $request) : bool;
 
-    public function resetPassword(ResetPasswordInfoRequest $request) : bool;
+    public function resetPassword(ResetPasswordInfoRequest $request) ;
 
 }

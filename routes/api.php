@@ -20,11 +20,6 @@ Route::post('auth/login', [AuthController::class, 'login']);
 Route::post('auth/forgot', [AuthController::class, 'forgotPassword']);
 
 /**
- * Reset Password Route
- */
-Route::post('auth/reset', [AuthController::class, 'resetPassword']);
-
-/**
  * Authenticated Routes
  */
 Route::middleware('auth:api')->group(function () {

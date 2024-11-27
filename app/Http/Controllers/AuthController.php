@@ -39,7 +39,7 @@ class AuthController extends Controller
         return AuthFacade::forgotPassword($request);
     }
 
-    public function resetPassword(ResetPasswordInfoRequest $request) : bool
+    public function resetPassword(ResetPasswordInfoRequest $request)
     {
         return AuthFacade::resetPassword($request);
     }

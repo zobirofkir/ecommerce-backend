@@ -12,6 +12,7 @@ use App\Jobs\ForgetPasswordJob;
 use App\Models\User;
 use App\Notifications\ResetPasswordNotification;
 use App\Services\Constructors\AuthConstructor;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -65,7 +66,7 @@ class AuthService implements AuthConstructor
         return true;
     }
 
-    public function resetPassword(ResetPasswordInfoRequest $request): bool
+    public function resetPassword(ResetPasswordInfoRequest $request)
     {
         $status = Password::broker()->reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
@@ -76,11 +77,14 @@ class AuthService implements AuthConstructor
         );
 
         if ($status === Password::PASSWORD_RESET) {
-            return true;
+            return redirect()->back()->with('status', __('You password has been updated successfully !'));
         }
 
-        return false;
+        return redirect()->back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => trans($status)]);
     }
+
 
     public function logout() : bool
     {
