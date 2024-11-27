@@ -8,6 +8,7 @@ use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Resources\AuthResource;
 use App\Http\Resources\LoginResource;
 use App\Http\Resources\RefreshTokenResource;
+use App\Jobs\ForgetPasswordJob;
 use App\Models\User;
 use App\Notifications\ResetPasswordNotification;
 use App\Services\Constructors\AuthConstructor;
@@ -58,8 +59,7 @@ class AuthService implements AuthConstructor
         $user = User::where('email', $request->email)->first();
 
         if ($user) {
-            $token = Password::getRepository()->create($user);
-            $user->notify(new ResetPasswordNotification($token));
+            ForgetPasswordJob::dispatch($user);
         }
 
         return true;
