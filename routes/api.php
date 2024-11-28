@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,11 @@ Route::post('auth/forgot', [AuthController::class, 'forgotPassword']);
  * Category Routes
  */
 Route::apiResource('/categories', CategoryController::class);
+
+/**
+ * Product Routes
+ */
+Route::apiResource('/products', ProductController::class);
 
 /**
  * Authenticated Routes
