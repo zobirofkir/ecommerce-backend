@@ -26,19 +26,22 @@ class Category extends Model
     {
         parent::boot();
 
-        static::creating(function ($blog) {
-            $blog->slug = Str::slug($blog->title);
+        static::creating(function ($category) {
+            $category->slug = Str::slug($category->title);
         });
 
-        static::updating(function ($blog) {
-            if ($blog->isDirty('title')) {
-                $blog->slug = Str::slug($blog->title);
+        static::updating(function ($category) {
+            if ($category->isDirty('title')) {
+                $category->slug = Str::slug($category->title);
             }
         });
     }
 
-
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function products(){
+        return $this->hasMany(Product::class);
     }
 }
