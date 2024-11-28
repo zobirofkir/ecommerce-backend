@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,12 @@ Route::post('auth/login', [AuthController::class, 'login']);
  * Forgot Password Route
  */
 Route::post('auth/forgot', [AuthController::class, 'forgotPassword']);
+
+
+/**
+ * Category Routes
+ */
+Route::apiResource('/categories', CategoryController::class);
 
 /**
  * Authenticated Routes
