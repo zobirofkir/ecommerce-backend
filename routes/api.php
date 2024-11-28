@@ -51,7 +51,7 @@ Route::middleware('auth:api')->group(function () {
     /**
      * Add To Cart Route
      */
-    Route::post('carts/{productId}', [CartController::class, 'addToCart']);
+    Route::post('carts/{cartId}', [CartController::class, 'addToCart']);
 
     /**
      * Get Product From Card
@@ -66,7 +66,7 @@ Route::middleware('auth:api')->group(function () {
     /**
      * Update Product From Card
      */
-    Route::put('carts/{productId}', [CartController::class, 'updateCartQuantity']);
+    Route::put('carts/{cartId}', [CartController::class, 'updateCartQuantity']);
 
     /**
      * Refresh Route

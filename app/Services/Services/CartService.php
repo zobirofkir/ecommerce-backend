@@ -9,18 +9,18 @@ use App\Http\Resources\CartResource;
 
 class CartService implements CartConstructor
 {
-    public function addToCart($user, $productId, $quantity = 1)
+    public function addToCart($user, $cartId, $quantity = 1)
     {
         if (!$user) {
             abort(401);
         }
 
-        $product = Product::find($productId);
+        $product = Product::find($cartId);
         if (!$product) {
             abort(404);
         }
 
-        $cartItem = Cart::where('user_id', $user->id)->where('product_id', $productId)->first();
+        $cartItem = Cart::where('user_id', $user->id)->where('product_id', $cartId)->first();
 
         if ($cartItem) {
             $cartItem->quantity += $quantity;
@@ -28,7 +28,7 @@ class CartService implements CartConstructor
         } else {
             $cartItem = Cart::create([
                 'user_id' => $user->id,
-                'product_id' => $productId,
+                'product_id' => $cartId,
                 'quantity' => $quantity,
             ]);
         }
@@ -53,29 +53,27 @@ class CartService implements CartConstructor
             abort(401);
         }
 
-        // Fetch the specific cart item by user ID and cart ID
         $cartItem = Cart::where('user_id', $user->id)->where('id', $cartId)->first();
 
         if (!$cartItem) {
             abort(404);
         }
 
-        // Delete the cart item
         $cartItem->delete();
 
         return true;
     }
 
 
-    public function updateCartQuantity($user, $productId)
+    public function updateCartQuantity($user, $cartId)
     {
-        $quantity = request()->input('quantity'); // Get the quantity from the input JSON body
+        $quantity = request()->input('quantity');
 
         if (!$user) {
             abort(401);
         }
 
-        $cartItem = Cart::where('user_id', $user->id)->where('product_id', $productId)->first();
+        $cartItem = Cart::where('user_id', $user->id)->where('id', $cartId)->first();
 
         if (!$cartItem) {
             abort(404);

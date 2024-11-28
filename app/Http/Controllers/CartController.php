@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addToCart(Request $request, $productId)
+    public function addToCart(Request $request, $cartId)
     {
         $quantity = $request->input('quantity', 1);
         $user = $request->user();
-        return CartFacade::addToCart($user, $productId, $quantity);
+        return CartFacade::addToCart($user, $cartId, $quantity);
     }
 
     public function getCartItems(Request $request)
@@ -26,10 +26,10 @@ class CartController extends Controller
         return CartFacade::removeFromCart($user, $cartId);
     }
 
-    public function updateCartQuantity(Request $request, $productId)
+    public function updateCartQuantity(Request $request, $cartId)
     {
         $quantity = $request->input('quantity');
         $user = $request->user();
-        return CartFacade::updateCartQuantity($user, $productId, $quantity);
+        return CartFacade::updateCartQuantity($user, $cartId, $quantity);
     }
 }
