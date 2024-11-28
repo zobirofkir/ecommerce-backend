@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -46,6 +47,26 @@ Route::get('categories/{slug}/products', [ProductController::class, 'categoryPro
  * Authenticated Routes
  */
 Route::middleware('auth:api')->group(function () {
+
+    /**
+     * Add To Cart Route
+     */
+    Route::post('carts/{productId}', [CartController::class, 'addToCart']);
+
+    /**
+     * Get Product From Card
+     */
+    Route::get('carts', [CartController::class, 'getCartItems']);
+
+    /**
+     * Delect Product From Card
+     */
+    Route::delete('carts/{cartId}', [CartController::class, 'removeFromCart']);
+
+    /**
+     * Update Product From Card
+     */
+    Route::put('carts/{productId}', [CartController::class, 'updateCartQuantity']);
 
     /**
      * Refresh Route
