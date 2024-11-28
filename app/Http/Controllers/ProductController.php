@@ -17,4 +17,9 @@ class ProductController extends Controller
     {
         return ProductFacade::show($product, $slug);
     }
+
+    public function categoryProducts($categorySlug)
+    {
+        return ProductFacade::categoryProducts($categorySlug);
+    }
 }
