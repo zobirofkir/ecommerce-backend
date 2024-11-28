@@ -30,7 +30,9 @@ Route::apiResource('/categories', CategoryController::class);
 /**
  * Product Routes
  */
-Route::apiResource('/products', ProductController::class);
+Route::get('/products', [ProductController::class, 'index']);
+
+Route::get('/products/{slug}', [ProductController::class, 'show']);
 
 /**
  * Authenticated Routes

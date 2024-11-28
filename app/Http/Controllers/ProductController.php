@@ -13,8 +13,8 @@ class ProductController extends Controller
     }
 
 
-    public function show(Product $product)
+    public function show(Product $product, $slug)
     {
-        return ProductFacade::make($product);
+        return ProductFacade::show($product, $slug);
     }
 }

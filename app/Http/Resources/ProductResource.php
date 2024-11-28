@@ -24,6 +24,7 @@ class ProductResource extends JsonResource
                         : asset('storage/' . $this->images),
             "description" => $this->description,
             "price" => $this->price,
+            "slug" => $this->slug,
             "created_at" => $this->created_at
         ];
     }

@@ -14,8 +14,9 @@ class ProductService implements ProductConstructor
         );
     }
 
-    public function show(Product $product)
+    public function show(Product $product, $slug)
     {
-        return productResource::make($product);
+        $product  = Product::where('slug', $slug)->first();
+        return ProductResource::make($product);
     }
 }
