@@ -33,7 +33,8 @@ class Product extends Model
     }
 
     protected $casts = [
-        "images" => "array"
+        "images" => "array",
+        "price" => "float",
     ];
 
     public function user()

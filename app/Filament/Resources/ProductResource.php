@@ -40,7 +40,7 @@ class ProductResource extends Resource
                             ->disk('public')
                             ->directory('products'),
                 Textarea::make("description"),
-                TextInput::make("price"),
+                TextInput::make("price")->numeric(),
                 Select::make("category_id")->relationship("category", "title"),
                 Hidden::make("user_id")->default(Auth::user()->id),
             ])->columns(1);
