@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,21 @@ Route::get('categories/{slug}/products', [ProductController::class, 'categoryPro
  * Authenticated Routes
  */
 Route::middleware('auth:api')->group(function () {
+
+    /**
+     * Get Orders
+     */
+    Route::get('orders', [OrderController::class, 'allOrders']);
+
+    /**
+     * Get Order
+     */
+    Route::get('orders/{orderId}', [OrderController::class, 'getOrder']);
+
+    /**
+     * Create Order
+     */
+    Route::post('orders', [OrderController::class, 'createOrder']);
 
     /**
      * Add To Cart Route

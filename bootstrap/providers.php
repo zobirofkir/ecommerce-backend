@@ -6,5 +6,6 @@ return [
     App\Providers\CartServiceProvider::class,
     App\Providers\CategoryServiceProvider::class,
     App\Providers\Filament\AdminPanelProvider::class,
+    App\Providers\OrderServiceProvider::class,
     App\Providers\ProductServiceProvider::class,
 ];
