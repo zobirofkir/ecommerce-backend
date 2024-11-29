@@ -15,7 +15,16 @@ class OrderResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "url" => $this->url
+            "url" => $this->url,
+
+            /**
+             * Cash on delivery
+             */
+            "name" => $this->name,
+            "email" => $this->email,
+            "country" => $this->country,
+            "address" => $this->address,
+            "postal_code" => $this->postal_code,
         ];
     }
 }

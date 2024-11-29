@@ -9,7 +9,17 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'total',
-        'status'
+        'status',
+        'payment_method',
+
+        /**
+         * Shipping Information Cash on delivery
+         */
+        'name',
+        'email',
+        'country',
+        'address',
+        'postal_code',
     ];
 
     public function user()
