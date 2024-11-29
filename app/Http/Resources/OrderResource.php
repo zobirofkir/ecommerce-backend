@@ -25,6 +25,7 @@ class OrderResource extends JsonResource
             "country" => $this->country,
             "address" => $this->address,
             "postal_code" => $this->postal_code,
+            "payment_method" => $this->payment_method,
         ];
     }
 }
