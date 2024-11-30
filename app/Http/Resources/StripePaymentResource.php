@@ -16,9 +16,10 @@ class StripePaymentResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => $this->user->name,
+            "name" => $this->user->name ?? null,
             "total" => $this->total,
             "status" => $this->status,
+            "url" => $this->url,
             "created_at" => $this->created_at
         ];
     }
