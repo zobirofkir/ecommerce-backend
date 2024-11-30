@@ -10,16 +10,6 @@ class Order extends Model
         'user_id',
         'total',
         'status',
-        'payment_method',
-
-        /**
-         * Shipping Information Cash on delivery
-         */
-        'name',
-        'email',
-        'country',
-        'address',
-        'postal_code',
     ];
 
     public function user()

@@ -16,17 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->decimal('total', 10, 2);
             $table->string('status')->default('pending');
-            $table->string('payment_method')->default('cash_on_delivery');
-
-            /**
-             * Shipping Information Cash on delivery
-             */
-            $table->string('name');
-            $table->string('email');
-            $table->string('country')->nullable();
-            $table->string('address')->nullable();
-            $table->string('postal_code')->nullable();
-
             $table->timestamps();
         });
     }

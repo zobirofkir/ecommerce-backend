@@ -2,7 +2,7 @@
 
 namespace App\Services\Services\Payments;
 
-use App\Http\Resources\OrderResource;
+use App\Http\Resources\StripePaymentResource;
 use App\Models\Order;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
@@ -38,6 +38,6 @@ class StripePaymentService
             ],
         ]);
 
-        return OrderResource::make($session);
+        return StripePaymentResource::make($session);
     }
 }

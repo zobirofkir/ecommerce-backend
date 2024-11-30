@@ -12,5 +12,5 @@ interface OrderConstructor
 
     public function getOrder($orderId);
 
-    public function createOrder($user, PaymentMethodEnum $paymentMethod = PaymentMethodEnum::CASH_ON_DELIVERY, array $validatedData);
+    public function createOrder($user);
 }

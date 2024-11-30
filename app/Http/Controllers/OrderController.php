@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Services\Facades\OrderFacade;
-use App\Enums\PaymentMethodEnum;
-use App\Http\Requests\CashOnDeliveryRequest;
-use App\Http\Requests\PaymentMethodRequest;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -20,16 +17,10 @@ class OrderController extends Controller
         return OrderFacade::getOrder($orderId);
     }
 
-
-    public function createOrder(PaymentMethodRequest $request, CashOnDeliveryRequest $cashOnDeliveryRequest)
+    public function createOrder(Request $request)
     {
-        $validated = $request->validated();
-        $cashOnDeliveryValidated = $cashOnDeliveryRequest->validated();
-
         $user = $request->user();
-        $paymentMethod = PaymentMethodEnum::from($validated['payment_method']);
 
-        return OrderFacade::createOrder($user, $paymentMethod, $cashOnDeliveryValidated);
+        return OrderFacade::createOrder($user);
     }
-
 }

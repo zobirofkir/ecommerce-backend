@@ -62,7 +62,7 @@ Route::middleware('auth:api')->group(function () {
     /**
      * Create Order
      */
-    Route::post('orders', [OrderController::class, 'createOrder']);
+    Route::post('/orders/stripe', [OrderController::class, 'createOrder']);
 
     /**
      * Add To Cart Route

@@ -24,7 +24,7 @@ class PaymentMethodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payment_method' => ['required', new Enum(PaymentMethodEnum::class)],
+            'payment_method' => "required",
         ];
     }
 }
