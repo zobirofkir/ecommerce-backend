@@ -15,7 +15,10 @@ class StripePaymentResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "url" => $this->url,
+            "id" => $this->id,
+            "title" => $this->user->name,
+            "total" => $this->total,
+            "status" => $this->status
         ];
     }
 }
