@@ -4,10 +4,11 @@ namespace App\Services\Services\Payments;
 
 use App\Http\Resources\StripePaymentResource;
 use App\Models\Order;
+use App\Services\Constructors\Payments\StripePaymentConstructor;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 
-class StripePaymentService
+class StripePaymentService implements StripePaymentConstructor
 {
     /**
      * Process payment for an order.
