@@ -22,7 +22,7 @@ class OrderService implements OrderConstructor
     public function allOrders()
     {
         return StripePaymentResource::collection(
-            Order::with('products')->where('user_id', Auth::id())->get()
+            Order::with('products')->where('user_id', Auth::id())->orderBy('id', 'desc')->get()
         );
     }
 

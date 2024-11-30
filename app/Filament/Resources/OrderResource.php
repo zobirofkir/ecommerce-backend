@@ -47,7 +47,7 @@ class OrderResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('total')
-                    ->label('Total')
+                    ->label('Total (MAD)')
                     ->sortable(),
 
                 TextColumn::make('status')
@@ -55,6 +55,7 @@ class OrderResource extends Resource
                     ->getStateUsing(fn ($record) => OrderStatusEnum::from($record->status)->label())
                     ->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Order Status')

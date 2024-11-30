@@ -35,7 +35,6 @@ class ProductsRelationManager extends RelationManager
                             ->directory('products'),
                 Textarea::make("description"),
                 TextInput::make("price")->numeric(),
-                Select::make("category_id")->relationship("category", "title"),
                 Hidden::make("user_id")->default(Auth::user()->id),
             ])->columns(1);
     }
