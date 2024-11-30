@@ -60,9 +60,14 @@ Route::middleware('auth:api')->group(function () {
     Route::get('orders/{orderId}', [OrderController::class, 'getOrder']);
 
     /**
-     * Create Order
+     * Create Stripe Order
      */
-    Route::post('/stripe/orders', [OrderController::class, 'createOrder']);
+    Route::post('/stripe/orders', [OrderController::class, 'stripeOrder']);
+
+    /**
+     * Create Cash On Delevery Order
+     */
+    Route::post('/cash/orders', [OrderController::class, 'cashOrder']);
 
     /**
      * Add To Cart Route

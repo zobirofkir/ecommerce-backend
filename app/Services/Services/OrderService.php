@@ -36,7 +36,7 @@ class OrderService implements OrderConstructor
         return $order;
     }
 
-    public function createOrder($user)
+    public function stripeOrder($user)
     {
         $cartItems = Cart::with('product')->where('user_id', $user->id)->get();
 

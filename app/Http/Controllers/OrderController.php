@@ -17,10 +17,10 @@ class OrderController extends Controller
         return OrderFacade::getOrder($orderId);
     }
 
-    public function createOrder(Request $request)
+    public function stripeOrder(Request $request)
     {
         $user = $request->user();
 
-        return OrderFacade::createOrder($user);
+        return OrderFacade::stripeOrder($user);
     }
 }
