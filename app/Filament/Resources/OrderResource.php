@@ -35,7 +35,7 @@ class OrderResource extends Resource
                     ->required()
                     ->default(OrderStatusEnum::PENDING->value),
                 Hidden::make('user_id')->default(Auth::id())
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
