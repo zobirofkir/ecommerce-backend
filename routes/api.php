@@ -60,11 +60,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('orders', [OrderController::class, 'allOrders']);
 
     /**
-     * Get Order
-     */
-    Route::get('orders/{orderId}', [OrderController::class, 'getOrder']);
-
-    /**
      * Create Stripe Order
      */
     Route::post('/stripe/orders', [OrderController::class, 'stripeOrder']);

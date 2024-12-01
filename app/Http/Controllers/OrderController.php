@@ -2,22 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\StripePaymentResource;
 use App\Services\Facades\OrderFacade;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class OrderController extends Controller
 {
-    public function allOrders()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function allOrders() : AnonymousResourceCollection
     {
         return OrderFacade::allOrders();
     }
 
-    public function getOrder($orderId)
-    {
-        return OrderFacade::getOrder($orderId);
-    }
-
-    public function stripeOrder(Request $request)
+    /**
+     * Undocumented function
+     *
+     * @return StripePaymentResource
+     */
+    public function stripeOrder(Request $request) : StripePaymentResource
     {
         $user = $request->user();
 

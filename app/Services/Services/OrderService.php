@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Cart;
 use App\Services\Constructors\OrderConstructor;
 use App\Services\Services\Payments\StripePaymentService;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -14,29 +15,32 @@ class OrderService implements OrderConstructor
 {
     protected $stripePaymentService;
 
+    /**
+     * OrderService constructor.
+     */
     public function __construct(StripePaymentService $stripePaymentService)
     {
         $this->stripePaymentService = $stripePaymentService;
     }
 
-    public function allOrders()
+    /**
+     * Get all orders
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function allOrders() : AnonymousResourceCollection
     {
         return StripePaymentResource::collection(
             Order::with('products')->where('user_id', Auth::id())->orderBy('id', 'desc')->get()
         );
     }
 
-    public function getOrder($orderId)
-    {
-        $order = Order::with('products')
-            ->where('id', $orderId)
-            ->where('user_id', Auth::id())
-            ->firstOrFail();
-
-        return $order;
-    }
-
-    public function stripeOrder($user)
+    /**
+     * Undocumented function
+     *
+     * @return StripePaymentResource
+     */
+    public function stripeOrder($user) : StripePaymentResource
     {
         $cartItems = Cart::with('product')->where('user_id', $user->id)->get();
 

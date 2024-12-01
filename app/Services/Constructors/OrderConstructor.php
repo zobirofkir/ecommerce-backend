@@ -10,7 +10,5 @@ interface OrderConstructor
 {
     public function allOrders();
 
-    public function getOrder($orderId);
-
     public function stripeOrder($user);
 }
