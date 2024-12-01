@@ -2,8 +2,10 @@
 
 namespace App\Filament\Widgets;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use Filament\Tables;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -20,8 +22,14 @@ class WidgetTableOrder extends BaseWidget
             )
             ->columns([
                 TextColumn::make('user.name'),
-                TextColumn::make('status'),
+                BadgeColumn::make('status')
+                            ->colors([
+                                "primary" => OrderStatusEnum::PENDING->value,
+                                "warning" => OrderStatusEnum::SHIPPED->value,
+                                "success" => OrderStatusEnum::DELIVERED->value,
+                                "danger" => OrderStatusEnum::CANCELLED->value
+                            ]),
                 TextColumn::make('total'),
-            ]);
+            ])->defaultSort('created_at', 'desc');
     }
 }

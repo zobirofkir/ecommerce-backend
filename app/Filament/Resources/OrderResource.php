@@ -10,6 +10,7 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
@@ -50,9 +51,14 @@ class OrderResource extends Resource
                     ->label('Total (MAD)')
                     ->sortable(),
 
-                TextColumn::make('status')
+                BadgeColumn::make('status')
                     ->label('Order Status')
-                    ->getStateUsing(fn ($record) => OrderStatusEnum::from($record->status)->label())
+                    ->colors([
+                        "primary" => OrderStatusEnum::PENDING->value,
+                        "warning" => OrderStatusEnum::SHIPPED->value,
+                        "success" => OrderStatusEnum::DELIVERED->value,
+                        "danger" => OrderStatusEnum::CANCELLED->value
+                    ])
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
