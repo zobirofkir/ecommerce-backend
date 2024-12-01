@@ -2,18 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Services\Facades\CategoryFacade;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function index() : AnonymousResourceCollection
     {
         return CategoryFacade::index();
     }
 
-    public function show(Category $category)
+    /**
+     * Display the specified resource.
+     *
+     * @return CategoryResource
+     */
+    public function show(Category $category) : CategoryResource
     {
         return CategoryFacade::show($category);
     }
