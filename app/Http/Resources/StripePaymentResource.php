@@ -20,7 +20,8 @@ class StripePaymentResource extends JsonResource
             "total" => $this->total,
             "status" => $this->status,
             "url" => $this->url,
-            "created_at" => $this->created_at
+            "created_at" => $this->created_at,
+            "products" => ProductResource::collection($this->whenLoaded('products'))
         ];
     }
 }
