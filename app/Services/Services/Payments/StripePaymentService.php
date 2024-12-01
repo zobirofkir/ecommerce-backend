@@ -22,7 +22,7 @@ class StripePaymentService implements StripePaymentConstructor
             'line_items' => [
                 [
                     'price_data' => [
-                        'currency' => 'usd',
+                        'currency' => 'MAD',
                         'product_data' => [
                             'name' => 'Order #' . $order->id,
                         ],
