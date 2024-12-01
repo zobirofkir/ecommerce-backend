@@ -6,10 +6,16 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Services\Constructors\CartConstructor;
 use App\Http\Resources\CartResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CartService implements CartConstructor
 {
-    public function addToCart($user, $cartId, $quantity = 1)
+    /**
+     * Add to cart
+     *
+     * @return CartResource
+     */
+    public function addToCart($user, $cartId, $quantity = 1) : CartResource
     {
         if (!$user) {
             abort(401);
@@ -36,7 +42,12 @@ class CartService implements CartConstructor
         return CartResource::make($cartItem);
     }
 
-    public function getCartItems($user)
+    /**
+     * Get cart items
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function getCartItems($user) : AnonymousResourceCollection
     {
         if (!$user) {
             abort(401);
@@ -47,7 +58,12 @@ class CartService implements CartConstructor
         return CartResource::collection($cartItems);
     }
 
-    public function removeFromCart($user, $cartId)
+    /**
+     * Remove from cart
+     *
+     * @return bool
+     */
+    public function removeFromCart($user, $cartId) : bool
     {
         if (!$user) {
             abort(401);
@@ -64,8 +80,12 @@ class CartService implements CartConstructor
         return true;
     }
 
-
-    public function updateCartQuantity($user, $cartId)
+    /**
+     * Update cart quantity
+     *
+     * @return CartResource
+     */
+    public function updateCartQuantity($user, $cartId) : CartResource
     {
         $quantity = request()->input('quantity');
 
