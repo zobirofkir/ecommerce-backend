@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\Password;
 
 class AuthService implements AuthConstructor
 {
+    /**
+     * Register a new user.
+     *
+     * @param AuthRequest $request
+     * @return AuthResource
+     */
     public function register(AuthRequest $request) : AuthResource
     {
         $validatedData = $request->validated();
@@ -33,6 +39,12 @@ class AuthService implements AuthConstructor
         return AuthResource::make($user);
     }
 
+    /**
+     * Login a user.
+     *
+     * @param LoginRequest $request
+     * @return LoginResource
+     */
     public function login(LoginRequest $request) : LoginResource
     {
         $validatedData = $request->validated();
@@ -45,16 +57,32 @@ class AuthService implements AuthConstructor
         return LoginResource::make($user);
     }
 
+    /**
+     * Refresh a user's token.
+     *
+     * @return RefreshTokenResource
+     */
     public function refresh() : RefreshTokenResource
     {
         return RefreshTokenResource::make(Auth::user());
     }
 
+    /**
+     * Get the authenticated user.
+     *
+     * @return AuthResource
+     */
     public function me() : AuthResource
     {
         return AuthResource::make(Auth::user());
     }
 
+    /**
+     * Send a password reset link to the given user.
+     *
+     * @param ResetPasswordRequest $request
+     * @return boolean
+     */
     public function forgotPassword(ResetPasswordRequest $request): bool
     {
         $user = User::where('email', $request->email)->first();
@@ -66,6 +94,12 @@ class AuthService implements AuthConstructor
         return true;
     }
 
+    /**
+     * Reset the given user's password.
+     *
+     * @param ResetPasswordInfoRequest $request
+     * @return void
+     */
     public function resetPassword(ResetPasswordInfoRequest $request)
     {
         $status = Password::broker()->reset(
@@ -85,7 +119,11 @@ class AuthService implements AuthConstructor
             ->withErrors(['email' => trans($status)]);
     }
 
-
+    /**
+     * Logout a user.
+     *
+     * @return boolean
+     */
     public function logout() : bool
     {
         return User::find(Auth::id())->tokens()->delete() ? true : false;
