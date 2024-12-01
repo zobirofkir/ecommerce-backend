@@ -29,7 +29,7 @@ class WidgetTableOrder extends BaseWidget
                                 "success" => OrderStatusEnum::DELIVERED->value,
                                 "danger" => OrderStatusEnum::CANCELLED->value
                             ]),
-                TextColumn::make('total'),
+                TextColumn::make('total')->label('Total (MAD)'),
             ])->defaultSort('created_at', 'desc');
     }
 }
