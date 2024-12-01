@@ -45,6 +45,11 @@ Route::get('/products/{slug}', [ProductController::class, 'show']);
 Route::get('categories/{slug}/products', [ProductController::class, 'categoryProducts']);
 
 /**
+ * Search Route
+ */
+Route::post('products/search', [ProductController::class, 'search']);
+
+/**
  * Authenticated Routes
  */
 Route::middleware('auth:api')->group(function () {

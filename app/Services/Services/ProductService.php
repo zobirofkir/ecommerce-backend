@@ -33,4 +33,14 @@ class ProductService implements ProductConstructor
 
         return ProductResource::collection($products);
     }
+
+    public function search($query)
+    {
+        $products = Product::where('title', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return ProductResource::collection($products);
+    }
 }
