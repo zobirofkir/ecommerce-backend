@@ -12,8 +12,10 @@ class StripePaymentService implements StripePaymentConstructor
 {
     /**
      * Process payment for an order.
+     *
+     * @return StripePaymentResource
      */
-    public function processPayment(Order $order)
+    public function processPayment(Order $order) : StripePaymentResource
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 

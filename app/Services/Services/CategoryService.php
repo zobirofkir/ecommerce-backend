@@ -20,6 +20,11 @@ class CategoryService implements CategoryConstructor
         );
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @return CategoryResource
+     */
     public function show(Category $category) : CategoryResource
     {
         return CategoryResource::make($category);
