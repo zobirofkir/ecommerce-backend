@@ -5,23 +5,42 @@ use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
 use App\Services\Constructors\ProductConstructor;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductService implements ProductConstructor
 {
-    public function index()
+    /**
+     * Get all products
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function index() : AnonymousResourceCollection
     {
         return ProductResource::collection(
             Product::orderBy('id', 'desc')->get()
         );
     }
 
-    public function show(Product $product, $slug)
+    /**
+     * Get single product
+     *
+     * @param Product $product
+     * @param $slug
+     * @return ProductResource
+     */
+    public function show(Product $product, $slug) : ProductResource
     {
         $product  = Product::where('slug', $slug)->first();
         return ProductResource::make($product);
     }
 
-    public function categoryProducts($categorySlug)
+    /**
+     * Get products by category
+     *
+     * @param $categorySlug
+     * @return AnonymousResourceCollection
+     */
+    public function categoryProducts($categorySlug) : AnonymousResourceCollection
     {
         $category = Category::where('slug', $categorySlug)->first();
 
@@ -34,7 +53,13 @@ class ProductService implements ProductConstructor
         return ProductResource::collection($products);
     }
 
-    public function search($query)
+    /**
+     * Search products
+     *
+     * @param $query
+     * @return AnonymousResourceCollection
+     */
+    public function search($query) : AnonymousResourceCollection
     {
         $products = Product::where('title', 'like', '%' . $query . '%')
             ->orWhere('description', 'like', '%' . $query . '%')
