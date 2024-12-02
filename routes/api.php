@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -48,6 +49,12 @@ Route::get('categories/{slug}/products', [ProductController::class, 'categoryPro
  * Search Route
  */
 Route::post('products/search', [ProductController::class, 'search']);
+
+
+/**
+ * OfferResource
+ */
+Route::apiResource('offers', OfferController::class);
 
 /**
  * Authenticated Routes
