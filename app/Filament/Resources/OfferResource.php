@@ -2,14 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Filament\Resources\CategoryResource\RelationManagers\OffersRelationManager;
-use App\Filament\Resources\CategoryResource\RelationManagers\ProductsRelationManager;
-use App\Models\Category;
+use App\Filament\Resources\OfferResource\Pages;
+use App\Filament\Resources\OfferResource\RelationManagers;
+use App\Models\Offer;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -22,25 +21,28 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryResource extends Resource
+class OfferResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static ?string $model = Offer::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = 'Offers';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make("title"),
-                FileUpload::make("image")
+                FileUpload::make("images")
+                            ->multiple()
                             ->required()
                             ->preserveFilenames()
                             ->disk('public')
-                            ->directory('categories'),
+                            ->directory('offers'),
                 Textarea::make("description"),
-                Hidden::make('user_id')->default(Auth::user()->id)
+                TextInput::make("price")->numeric(),
+                Select::make("category_id")->relationship("category", "title"),
+                Hidden::make("user_id")->default(Auth::user()->id),
             ])->columns(1);
     }
 
@@ -48,16 +50,17 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')
-                            ->label('Image')
-                            ->disk('public')
-                            ->width(50)
-                            ->height(50),
+                ImageColumn::make('images')
+                        ->label('Image')
+                        ->disk('public')
+                        ->width(50)
+                        ->height(50),
                 TextColumn::make("title"),
                 TextColumn::make("description")->limit(50),
+                TextColumn::make("price"),
                 TextColumn::make("created_at")->dateTime(),
+
             ])
-            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
@@ -74,17 +77,16 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ProductsRelationManager::class,
-            OffersRelationManager::class
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListOffers::route('/'),
+            'create' => Pages\CreateOffer::route('/create'),
+            'edit' => Pages\EditOffer::route('/{record}/edit'),
         ];
     }
 }
