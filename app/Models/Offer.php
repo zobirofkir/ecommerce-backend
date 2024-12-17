@@ -30,18 +30,4 @@ class Offer extends Model
     {
         return $this->belongsTo(User::class);
     }
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($offer) {
-            $offer->slug = Str::slug($offer->title);
-        });
-
-        static::updating(function ($offer) {
-            if ($offer->isDirty('title')) {
-                $offer->slug = Str::slug($offer->title);
-            }
-        });
-    }
 }
