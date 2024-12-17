@@ -22,21 +22,6 @@ class Category extends Model
         "image" => "array"
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($category) {
-            $category->slug = Str::slug($category->title);
-        });
-
-        static::updating(function ($category) {
-            if ($category->isDirty('title')) {
-                $category->slug = Str::slug($category->title);
-            }
-        });
-    }
-
     public function user(){
         return $this->belongsTo(User::class);
     }
