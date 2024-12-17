@@ -17,20 +17,6 @@ class Product extends Model
         "slug"
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($product) {
-            $product->slug = Str::slug($product->title);
-        });
-
-        static::updating(function ($product) {
-            if ($product->isDirty('title')) {
-                $product->slug = Str::slug($product->title);
-            }
-        });
-    }
 
     protected $casts = [
         "images" => "array",
