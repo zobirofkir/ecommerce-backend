@@ -9,4 +9,5 @@ return [
     App\Providers\OfferServiceProvider::class,
     App\Providers\OrderServiceProvider::class,
     App\Providers\ProductServiceProvider::class,
+    App\Providers\TelescopeServiceProvider::class,
 ];
